@@ -12,11 +12,6 @@ class AdminController extends Controller
     {
         return view('layouts.admin');
     }
-      function categoriesPage()
-    {
-        $categories = Category::all();
-        
-        return view('layouts.categories')->with('categories',$categories);
-    }
+    
 
 }
