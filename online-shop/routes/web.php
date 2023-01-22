@@ -21,4 +21,4 @@ Route::get('/shop', [HomeController::class, 'shop']);
 Route::get('/admin', [AdminController::class, 'admin']);
 Route::get('/admin/categories', [CategoryController::class, 'categoriesPage']);
 Route::get('/admin/addCategory', [CategoryController::class, 'addCategory']);
-Route::post('/admin/categories', [CategoryController::class, 'add']);
+Route::post('/admin/categories', [CategoryController::class, 'store'])->name('layouts.categories');

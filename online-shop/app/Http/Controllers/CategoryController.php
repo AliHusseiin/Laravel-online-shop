@@ -20,13 +20,12 @@ class CategoryController extends Controller
         return view('layouts.addCategory');
     }
     
-    function add(){
-        return view('layouts.categories');
-    }
+    
     function store(Request $request)
     {
         $request->validate([
-            'name'=> 'required|min:8'
+            'name'=> 'required|min:8',
+            'image'=>'required'
         ]);
 
         Category::create($request->post());

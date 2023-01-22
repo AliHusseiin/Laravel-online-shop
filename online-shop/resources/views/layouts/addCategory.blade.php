@@ -179,7 +179,7 @@
                 @error('name')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-                <input name="image" type="file" /><br />
+                <input name="image" /><br />
                 @error('image')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
