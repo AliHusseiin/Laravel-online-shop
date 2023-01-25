@@ -22,3 +22,6 @@ Route::get('/admin', [AdminController::class, 'admin']);
 Route::get('/admin/categories', [CategoryController::class, 'categoriesPage']);
 Route::get('/admin/addCategory', [CategoryController::class, 'addCategory']);
 Route::post('/admin/categories', [CategoryController::class, 'store'])->name('layouts.categories');
+Route::get('/admin/{id}/edit', [CategoryController::class, 'edit']);
+Route::put('/admin/{id}', [CategoryController::class, 'update']);
+Route::delete('/admin/{id}', [CategoryController::class, 'destroy']);

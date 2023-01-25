@@ -106,7 +106,7 @@
                with font-awesome or any other icon font library -->
 
                         <li class="nav-item">
-                            <a href="{{ url('admin/categories') }}"class="nav-link">
+                            <a href="pages/widgets.html" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     categories
@@ -171,60 +171,22 @@
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <a class="btn btn-success" href="{{ url('admin/addCategory') }}">Add</a>
-                            <table class="table table-bordered table-striped text-center ">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Name</th>
-                                        <th>Image</th>
-                                        <th>Category</th>
-                                        <th>Price</th>
-                                        <th>Discount</th>
-                                        <th scope>Description</th>
-                                        <th scope>Recent</th>
-                                        <th scope>Featured</th>
-                                        <th colspan="2">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($categories as $category)
-                                        <tr>
-                                            <td> {{ $category['id'] }} </td>
-                                            <td>{{ $category['name'] }} </td>
-                                            <td><img src="../<?= $category['image'] ?>" height="150"
-                                                    width="150px" /></td>
-                                            <td> {{ $category['category_id'] }} </td>
-                                            <td> {{ $category['price'] }}</td>
-                                            <td>{{ $category['discount'] * 100 }} %</td>
-                                            <td> {{ $category['description'] }} </td>
-                                            <td> {{ $category['is_recent'] ? 'yes' : 'no' }} </td>
-                                            <td> {{ $category['is_featured'] ? 'yes' : 'no' }}</td>
-                                            <td scope="col">
-                                                <form action="{{ url('admin/' . $category['id']) }}" method="POST">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button onclick="return confirm('Are You Sure?')"
-                                                        class="btn btn-danger">DELETE</button>
-                                                </form>
-                                            </td>
-                                            <td scope="col"><button class="btn btn-success"><a
-                                                        href="{{ url('admin/' . $category['id'] . '/edit') }}">
-                                                        EDIT</a></button></td>
-                                        </tr>
-                                    @endforeach
-
-                                </tbody>
-                            </table>
-                            {!! $categories->links() !!}
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <h2>Edit Category</h2>
+            <form method="POST" action="{{ url('admin/' . $categories->id) }}" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <label>Name</label>
+                <input class="form-control" name="name" value="{{ old('name', $categories->name) }}" />
+                @error('name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                <input name="image" value="{{ old('name', $categories->image) }}" /><br />
+                @error('image')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                <button class="btn btn-primary">Edit</button>
+                <a class="btn btn-secondary" href="{{ url('admin/categories') }}">Cancel</a>
+            </form>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->

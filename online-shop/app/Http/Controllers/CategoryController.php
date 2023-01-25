@@ -33,4 +33,36 @@ class CategoryController extends Controller
       
         return redirect()->route('layouts.categories');
     }
+
+    function edit($id)
+    {
+        $categories = Category::findOrFail($id);
+        return view('layouts.edit', compact('categories'));
+
+    }
+    function update($id,Request $request)
+    {
+         $categories = Category::findOrFail($id);
+          $request->validate([
+            'name'=> 'required|min:8',
+            'image'=>'required'
+        ]);
+
+        $categories['name'] = $request['name'];
+        $categories['image'] = $request['image'];
+        $categories->save();
+        return redirect()->route('layouts.categories');
+
+
+    }
+
+    function destroy($id)
+    {
+        
+        $categories = Category::findOrFail($id);
+
+        $categories->destroy($id);
+        return redirect()->route('layouts.categories');
+
+    }
 }
