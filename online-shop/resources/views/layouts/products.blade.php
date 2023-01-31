@@ -171,21 +171,66 @@
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <h2>Add Category</h2>
-            <form method="POST" action="{{ url('admin/categories') }}" enctype="multipart/form-data">
-                @csrf
-                <label>Name</label>
-                <input class="form-control" name="name" value="{{ old('name') }}" />
-                @error('name')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-                <input name="image" type="file" /><br />
-                @error('image')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-                <button class="btn btn-primary">Add</button>
-                <a class="btn btn-secondary" href="{{ url('admin/categories') }}">Cancel</a>
-            </form>
+            <section class="content">
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @endif
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <a class="btn btn-success" href="{{ url('admin/addProduct') }}">Add</a>
+                            <table class="table table-bordered table-striped text-center ">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Image</th>
+                                        <th>category</th>
+                                        <th>Price</th>
+                                        <th>Discount</th>
+                                        <th scope>Description</th>
+                                        <th scope>Recent</th>
+                                        <th scope>Featured</th>
+                                        <th colspan="2">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($products as $product)
+                                        <tr>
+                                            <td> {{ $product['id'] }} </td>
+                                            <td>{{ $product['name'] }} </td>
+                                            <td><img src="../<?= $product['image'] ?>" height="150"
+                                                    width="150px" /></td>
+                                            <td> {{ $product['category']['name'] }} </td>
+                                            <td> {{ $product['price'] }}</td>
+                                            <td>{{ $product['discount'] * 100 }} %</td>
+                                            <td> {{ $product['description'] }} </td>
+                                            <td> {{ $product['is_recent'] ? 'yes' : 'no' }} </td>
+                                            <td> {{ $product['is_featured'] ? 'yes' : 'no' }}</td>
+                                            <td scope="col">
+                                                <form action="{{ url('admin/' . $product['id']) }}" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button onclick="return confirm('Are You Sure?')"
+                                                        class="btn btn-danger">DELETE</button>
+                                                </form>
+                                            </td>
+                                            <td scope="col"><button class="btn btn-success"><a
+                                                        href="{{ url('admin/' . $product['id'] . '/edit') }}">
+                                                        EDIT</a></button></td>
+                                        </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                            {!! $products->links() !!}
+                        </div>
+                    </div>
+                </div>
+            </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->

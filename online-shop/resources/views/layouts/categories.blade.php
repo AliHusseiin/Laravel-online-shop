@@ -115,6 +115,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ url('admin/products') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Products
+
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="pages/widgets.html" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
@@ -128,15 +137,6 @@
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Customers
-
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Products
 
                                 </p>
                             </a>
@@ -172,6 +172,12 @@
 
             <!-- Main content -->
             <section class="content">
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @endif
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
@@ -196,7 +202,7 @@
                                         <tr>
                                             <td> {{ $category['id'] }} </td>
                                             <td>{{ $category['name'] }} </td>
-                                            <td><img src="../<?= $category['image'] ?>" height="150"
+                                            <td><img src="{{ url($category['image']) }}" height="150"
                                                     width="150px" /></td>
                                             <td> {{ $category['category_id'] }} </td>
                                             <td> {{ $category['price'] }}</td>

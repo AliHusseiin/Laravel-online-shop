@@ -171,7 +171,7 @@
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <h2>Add Category</h2>
+            <h2>Add Product</h2>
             <form method="POST" action="{{ url('admin/categories') }}" enctype="multipart/form-data">
                 @csrf
                 <label>Name</label>
@@ -179,12 +179,22 @@
                 @error('name')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-                <input name="image" type="file" /><br />
+                <input name="image" /><br />
                 @error('image')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
+                <select name="category_id" class="form-control">
+                    <option>Select Category</option>
+
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}"
+                            {{ old('category_id') == $category['id'] ? 'selected' : '' }}>
+                            {{ $category->name }}</option>
+                    @endforeach
+
+                </select>
                 <button class="btn btn-primary">Add</button>
-                <a class="btn btn-secondary" href="{{ url('admin/categories') }}">Cancel</a>
+                <a class="btn btn-secondary" href="{{ url('admin/products') }}">Cancel</a>
             </form>
             <!-- /.content -->
         </div>

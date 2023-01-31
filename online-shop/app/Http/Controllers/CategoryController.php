@@ -23,12 +23,15 @@ class CategoryController extends Controller
     
     function store(Request $request)
     {
-        $request->validate([
-            'name'=> 'required|min:8',
-            'image'=>'required'
-        ]);
+        $request->validate(Category::$ruels);
 
-        Category::create($request->post());
+        $imageUrl = $request->file('image')->store('categories',['disk' => 'public']); 
+
+        $category = new Category;
+        $category->fill($request->post());
+        $category['image'] = $imageUrl;
+
+        $category->save();
 
       
         return redirect()->route('layouts.categories');
@@ -48,8 +51,10 @@ class CategoryController extends Controller
             'image'=>'required'
         ]);
 
-        $categories['name'] = $request['name'];
-        $categories['image'] = $request['image'];
+        $categories->fill($request->post());
+        $imageUrl = $request->file('image')->store('categories',['disk' => 'public']); 
+
+        $categories['image'] = $imageUrl;
         $categories->save();
         return redirect()->route('layouts.categories');
 
@@ -62,7 +67,7 @@ class CategoryController extends Controller
         $categories = Category::findOrFail($id);
 
         $categories->destroy($id);
-        return redirect()->route('layouts.categories');
+        return redirect()->route('layouts.categories')->with('success','Item has been deleted Successfuly');
 
     }
 }

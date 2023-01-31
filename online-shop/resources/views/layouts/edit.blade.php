@@ -106,10 +106,19 @@
                with font-awesome or any other icon font library -->
 
                         <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
+                            <a href="{{ url('admin/categories') }}"class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     categories
+
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('admin/products') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Products
 
                                 </p>
                             </a>
@@ -128,15 +137,6 @@
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Customers
-
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Products
 
                                 </p>
                             </a>
@@ -180,7 +180,7 @@
                 @error('name')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-                <input name="image" value="{{ old('name', $categories->image) }}" /><br />
+                <input name="image" type="file" /><br />
                 @error('image')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
