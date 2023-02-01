@@ -3,7 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,13 +19,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[HomeController::class,'index'] );
 Route::get('/shop', [HomeController::class, 'shop']);
-Route::get('/admin', [AdminController::class, 'admin']);
-Route::get('/admin/categories', [CategoryController::class, 'categoriesPage']);
-Route::get('/admin/addCategory', [CategoryController::class, 'addCategory']);
-Route::post('/admin/categories', [CategoryController::class, 'store'])->name('layouts.categories');
-Route::get('/admin/{id}/edit', [CategoryController::class, 'edit']);
-Route::put('/admin/{id}', [CategoryController::class, 'update']);
-Route::delete('/admin/{id}', [CategoryController::class, 'destroy']);
+Route::prefix('admin')->group(function () {
+  Route::get('', [AdminController::class, 'admin']);
+  Route::get('categories', [CategoryController::class, 'index']);
+  Route::get('addCategory', [CategoryController::class, 'create']);
+  Route::post('categories', [CategoryController::class, 'store'])->name('admin.categories.categories');
+  Route::get('{id}/edit', [CategoryController::class, 'edit']);
+  Route::put('{id}', [CategoryController::class, 'update']);
+  Route::delete('{id}', [CategoryController::class, 'destroy']);
 
-Route::get('/admin/products', [ProductsController::class, 'productsPage']);
-Route::get('/admin/addProduct', [ProductsController::class, 'addProduct']);
+  // Route::get('/admin/products', [ProductsController::class, 'productsPage']);
+// Route::get('/admin/addProduct', [ProductsController::class, 'addProduct']);
+  Route::resource('products', ProductController::class);
+});

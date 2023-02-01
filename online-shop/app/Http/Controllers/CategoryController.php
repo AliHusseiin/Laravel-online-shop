@@ -3,21 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Color;
+use App\Models\Size;
 use Illuminate\Http\Request;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class CategoryController extends Controller
 {
     //
-      function categoriesPage()
+      function index()
     {
         $categories = Category::paginate(5);
         
-        return view('layouts.categories')->with('categories',$categories);
+        return view('admin.categories.categories')->with('categories',$categories);
     }
     
-    function addCategory() {
-        return view('layouts.addCategory');
+    function create() {
+      
+        return view('admin.categories.addCategory');
     }
     
     
@@ -34,29 +37,28 @@ class CategoryController extends Controller
         $category->save();
 
       
-        return redirect()->route('layouts.categories');
+        return redirect()->route('admin.categories.categories');
     }
 
     function edit($id)
     {
         $categories = Category::findOrFail($id);
-        return view('layouts.edit', compact('categories'));
+        return view('admin.categories.edit', compact('categories'));
 
     }
     function update($id,Request $request)
     {
          $categories = Category::findOrFail($id);
-          $request->validate([
-            'name'=> 'required|min:8',
-            'image'=>'required'
-        ]);
+          $request->validate(Category::$ruels
+           
+        );
 
         $categories->fill($request->post());
         $imageUrl = $request->file('image')->store('categories',['disk' => 'public']); 
 
         $categories['image'] = $imageUrl;
         $categories->save();
-        return redirect()->route('layouts.categories');
+        return redirect()->route('admin.categories.categories');
 
 
     }
@@ -67,7 +69,7 @@ class CategoryController extends Controller
         $categories = Category::findOrFail($id);
 
         $categories->destroy($id);
-        return redirect()->route('layouts.categories')->with('success','Item has been deleted Successfuly');
+        return redirect()->route('admin.categories.categories')->with('success','Item has been deleted Successfuly');
 
     }
 }
