@@ -1,7 +1,6 @@
 @extends('layouts.main')
 @section('content')
-    <!-- Main content -->
-    <h2>Add Product</h2>
+    <h2>Add Products</h2>
     <form method="POST" action="{{ url('admin/products') }}" enctype="multipart/form-data">
         @csrf
         <label>Product Name</label>
@@ -24,7 +23,7 @@
             </select>
             <div>
                 <label>Description</label>
-                <input class="form-control" type="text" name="description" value="{{ old('description') }}">
+                <textarea class="form-control" name="description" value="{{ old('description') }}"></textarea>
             </div>
             <div>
                 <label>Price</label>
@@ -58,5 +57,4 @@
             <a class="btn btn-secondary" href="{{ url('admin/products') }}">Cancel</a>
         </div>
     </form>
-    <!-- /.content -->
 @endsection

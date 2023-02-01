@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <a class="btn btn-success" href="{{ url('admin/addProduct') }}">Add</a>
+                <a class="btn btn-success" href="{{ url('admin/products/create') }}">Add</a>
                 <table class="table table-bordered table-striped text-center ">
                     <thead class="thead-dark">
                         <tr>

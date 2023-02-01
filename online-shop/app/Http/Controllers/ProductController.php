@@ -33,7 +33,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $colors = Color::all();
         $sizes = Size::all();
-        return view('admin.products.addProducts', compact('categories','colors','sizes'));
+        return view('admin.products.addProduct', compact('categories','colors','sizes'));
     }
 
     /**

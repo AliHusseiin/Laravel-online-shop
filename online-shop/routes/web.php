@@ -31,4 +31,5 @@ Route::prefix('admin')->group(function () {
   // Route::get('/admin/products', [ProductsController::class, 'productsPage']);
 // Route::get('/admin/addProduct', [ProductsController::class, 'addProduct']);
   Route::resource('products', ProductController::class);
+  // Route::get('addProduct', [ProductController::class, 'create']);
 });
