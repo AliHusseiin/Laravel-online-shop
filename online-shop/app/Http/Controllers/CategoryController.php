@@ -37,7 +37,7 @@ class CategoryController extends Controller
         $category->save();
 
       
-        return redirect()->route('admin.categories.categories');
+        return redirect()->route('categories.index');
     }
 
     function edit($id)
@@ -58,7 +58,7 @@ class CategoryController extends Controller
 
         $categories['image'] = $imageUrl;
         $categories->save();
-        return redirect()->route('admin.categories.categories');
+        return redirect()->route('categories.index');
 
 
     }
@@ -69,7 +69,7 @@ class CategoryController extends Controller
         $categories = Category::findOrFail($id);
 
         $categories->destroy($id);
-        return redirect()->route('admin.categories.categories')->with('success','Item has been deleted Successfuly');
+        return redirect()->route('categories.index')->with('success','Item has been deleted Successfuly');
 
     }
 }

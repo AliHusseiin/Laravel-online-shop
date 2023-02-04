@@ -2,7 +2,7 @@
 @section('content')
     <!-- Main content -->
     <h2>Edit Category</h2>
-    <form method="POST" action="{{ url('admin/' . $categories->id) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ url('admin/categories/' . $categories->id) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <label>Name</label>

@@ -35,9 +35,9 @@
             </div>
             <div class="form-group form-check form-group col-6">
                 <label>Featured</label>
-                <input type="checkbox" name='is_featured'>
+                <input type="checkbox" name='is_featured '{{ old('is_featured') ? 'checked' : '' }}>
                 <label>Recent</label>
-                <input type="checkbox" name='is_recent'>
+                <input type="checkbox" name='is_recent'{{ old('is_recent') ? 'checked' : '' }}>
             </div>
             <select class="form-control" name="size_id">
                 <option>Size</option>

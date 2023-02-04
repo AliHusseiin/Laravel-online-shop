@@ -7,6 +7,7 @@ use App\Models\Color;
 use App\Models\product;
 use App\Models\Size;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
@@ -18,7 +19,12 @@ class ProductController extends Controller
     public function index()
     {
         //
+        
          $products = Product::paginate(5);
+        //  if (! Gate::allows('is_admin'))
+        //  {
+        //     abort(403);
+        // }
         
         return view('admin.products.products')->with('products',$products);
     }

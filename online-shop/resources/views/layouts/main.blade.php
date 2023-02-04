@@ -80,8 +80,8 @@
                             alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Ali Hussein</a>
-                        <a href="#" class="d-block">alihusseiinali@gmail.com</a>
+                        <a href="#" class="d-block">{{ Auth::user() ? Auth::user()->name : '' }}</a>
+                        <a href="#" class="d-block">{{ Auth::user() ? Auth::user()->email : '' }}</a>
                     </div>
                 </div>
 

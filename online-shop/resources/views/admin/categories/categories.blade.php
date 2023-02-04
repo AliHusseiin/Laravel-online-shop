@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <a class="btn btn-success" href="{{ url('admin/addCategory') }}">Add</a>
+                <a class="btn btn-success" href="{{ url('admin/categories/create') }}">Add</a>
                 <table class="table table-bordered table-striped text-center ">
                     <thead class="thead-dark">
                         <tr>
@@ -21,7 +21,7 @@
                                 <td><img src="{{ asset('storage/' . $category['image']) }}" height="150" width="150px" />
                                 </td>
                                 <td scope="col">
-                                    <form action="{{ url('admin/' . $category['id']) }}" method="POST">
+                                    <form action="{{ url('admin/categories/' . $category['id']) }}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <button onclick="return confirm('Are You Sure?')"
@@ -29,7 +29,7 @@
                                     </form>
                                 </td>
                                 <td scope="col"><button class="btn btn-success"><a
-                                            href="{{ url('admin/' . $category['id'] . '/edit') }}">
+                                            href="{{ url('admin/categories/' . $category['id'] . '/edit') }}">
                                             EDIT</a></button></td>
                             </tr>
                         @endforeach
