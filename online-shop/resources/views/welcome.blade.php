@@ -163,7 +163,8 @@
                                     <a class="btn btn-outline-dark btn-square"
                                         onclick="addProductToSession({{ $product['id'] }})"><i
                                             class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square"><i class="far fa-heart"></i></a>
+                                    <a class="btn btn-outline-dark btn-square"
+                                        onclick="addToWishList({{ $product['id'] }})"><i class="far fa-heart"></i></a>
                                     <a class="btn btn-outline-dark btn-square"><i class="fa fa-sync-alt"></i></a>
                                     <a class="btn btn-outline-dark btn-square"><i class="fa fa-search"></i></a>
                                 </div>
@@ -235,14 +236,12 @@
                                     alt="" />
                                 <div class="product-action">
                                     <a class="btn btn-outline-dark btn-square"
-                                        href=""onclick="addProductToSession({{ $product['id'] }})"><i
+                                        onclick="addProductToSession({{ $product['id'] }})"><i
                                             class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i
-                                            class="far fa-heart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i
-                                            class="fa fa-sync-alt"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i
-                                            class="fa fa-search"></i></a>
+                                    <a class="btn btn-outline-dark btn-square"
+                                        onclick="addToWishList({{ $product['id'] }})"><i class="far fa-heart"></i></a>
+                                    <a class="btn btn-outline-dark btn-square"><i class="fa fa-sync-alt"></i></a>
+                                    <a class="btn btn-outline-dark btn-square"><i class="fa fa-search"></i></a>
                                 </div>
                             </div>
                             <div class="text-center py-4">
@@ -314,6 +313,18 @@
                 },
                 success: (data) => {
                     $('#product_count').html(data);
+                }
+            })
+        }
+
+        function addToWishList(id) {
+            $.ajax({
+                url: '{{ url('/addtowishlist') }}',
+                data: {
+                    id: id
+                },
+                success: (data) => {
+                    $('#like_count').html(data);
                 }
             })
         }

@@ -81,6 +81,16 @@ class HomeController extends Controller
         }
         return abort(404);
     }
+      function addToWishList(Request $request)
+    {
+        if ($request->has('id')) {
+            $wishList = Session::get('wishList', []);
+            array_push($wishList, $request->get('wishList'));
+            Session::put('wishList', $wishList);
+            return response()->json(count($wishList));
+        }
+        return abort(404);
+    }
     
 }
 

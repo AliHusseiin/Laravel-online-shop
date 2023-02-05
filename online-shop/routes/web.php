@@ -25,6 +25,7 @@ Route::get('/', [HomeController::class,'index']
 Route::get('/shop', [HomeController::class, 'shop']);
 Route::get('/cart',[CartController::class,'index'] );
 Route::get('/add-product',[HomeController::class,'add_product'] );
+Route::get('/addtowishlist',[HomeController::class,'addToWishList'] );
 Route::get('/inc-product',[CartController::class,'incProduct'] );
 Route::get('/dec-product',[CartController::class,'decProduct'] );
 Route::get('/rem-product',[CartController::class,'removeProduct'] );
