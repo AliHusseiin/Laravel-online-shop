@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -22,6 +23,11 @@ Route::get('/', [HomeController::class,'index']
     
 );
 Route::get('/shop', [HomeController::class, 'shop']);
+Route::get('/cart',[CartController::class,'index'] );
+Route::get('/add-product',[HomeController::class,'add_product'] );
+Route::get('/inc-product',[CartController::class,'incProduct'] );
+Route::get('/dec-product',[CartController::class,'decProduct'] );
+Route::get('/rem-product',[CartController::class,'removeProduct'] );
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -34,9 +40,11 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
-Route::middleware(['auth','can:is_admin'])->prefix('admin')->group(function () { 
-  Route::resource('admin', AdminController::class);
+// Route::middleware(['auth','can:is_admin'])->group(function () { 
+//   Route::resource('admin', AdminController::class);
+// });
+Route::middleware(['auth', 'can:is_admin'])->prefix('admin')->group(function () {
+  Route::get('', [AdminController::class, 'index']);
   Route::resource('categories', CategoryController::class);
   Route::resource('products', ProductController::class);
 });

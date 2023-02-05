@@ -7,6 +7,7 @@ use App\Models\Color;
 use App\Models\product;
 use App\Models\Size;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -70,4 +71,16 @@ class HomeController extends Controller
             'sizes' => Size::all()
         ]);
     }
+      function add_product(Request $request)
+    {
+        if ($request->has('id')) {
+            $cartIds = Session::get('ids', []);
+            array_push($cartIds, $request->get('id'));
+            Session::put('ids', $cartIds);
+            return response()->json(count($cartIds));
+        }
+        return abort(404);
+    }
+    
 }
+

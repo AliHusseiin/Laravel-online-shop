@@ -157,12 +157,9 @@
                                             <a class="btn btn-outline-dark btn-square"
                                                 onclick="addProductToSession({{ $product['id'] }})"><i
                                                     class="fa fa-shopping-cart"></i></a>
-                                            <a class="btn btn-outline-dark btn-square" href=""><i
-                                                    class="far fa-heart"></i></a>
-                                            <a class="btn btn-outline-dark btn-square" href=""><i
-                                                    class="fa fa-sync-alt"></i></a>
-                                            <a class="btn btn-outline-dark btn-square" href=""><i
-                                                    class="fa fa-search"></i></a>
+                                            <a class="btn btn-outline-dark btn-square"><i class="far fa-heart"></i></a>
+                                            <a class="btn btn-outline-dark btn-square"><i class="fa fa-sync-alt"></i></a>
+                                            <a class="btn btn-outline-dark btn-square"><i class="fa fa-search"></i></a>
                                         </div>
                                     </div>
                                     <div class="text-center py-4">
@@ -195,4 +192,19 @@
         <!-- Shop End -->
     </form>
     <!-- Shop End -->
+@endsection
+@section('scripts')
+    <script>
+        function addProductToSession(id) {
+            $.ajax({
+                url: '{{ url('/add-product') }}',
+                data: {
+                    id: id
+                },
+                success: (data) => {
+                    $('#product_count').html(data);
+                }
+            })
+        }
+    </script>
 @endsection
