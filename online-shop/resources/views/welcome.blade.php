@@ -166,7 +166,8 @@
                                     <a class="btn btn-outline-dark btn-square"
                                         onclick="addToWishList({{ $product['id'] }})"><i class="far fa-heart"></i></a>
                                     <a class="btn btn-outline-dark btn-square"><i class="fa fa-sync-alt"></i></a>
-                                    <a class="btn btn-outline-dark btn-square"><i class="fa fa-search"></i></a>
+                                    <a href="{{ url('/details/' . $product->id) }}"
+                                        class="btn btn-outline-dark btn-square"><i class="fa fa-search"></i></a>
                                 </div>
                             </div>
                             <div class="text-center py-4">
@@ -241,7 +242,8 @@
                                     <a class="btn btn-outline-dark btn-square"
                                         onclick="addToWishList({{ $product['id'] }})"><i class="far fa-heart"></i></a>
                                     <a class="btn btn-outline-dark btn-square"><i class="fa fa-sync-alt"></i></a>
-                                    <a class="btn btn-outline-dark btn-square"><i class="fa fa-search"></i></a>
+                                    <a href="{{ url('/details/' . $product->id) }}"
+                                        class="btn btn-outline-dark btn-square"><i class="fa fa-search"></i></a>
                                 </div>
                             </div>
                             <div class="text-center py-4">

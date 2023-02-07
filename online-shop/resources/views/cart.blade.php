@@ -86,9 +86,9 @@
                                 <h5>Total</h5>
                                 <h5 id="total">${{ $total }}</h5>
                             </div>
-                            <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">
+                            <a href="{{ url('/checkout') }}" class="btn btn-block btn-primary font-weight-bold my-3 py-3">
                                 Proceed To Checkout
-                            </button>
+                            </a>
                         </div>
                     </div>
 
@@ -131,6 +131,20 @@
                 $.ajax({
 
                     url: '{{ url('/rem-product') }}',
+                    data: {
+                        id: id
+                    },
+                    success: () => {
+                        console.log('data');
+                    }
+
+                })
+            }
+
+            function proceedToCheckOut(id) {
+                $.ajax({
+
+                    url: '{{ url('/checkout') }}',
                     data: {
                         id: id
                     },

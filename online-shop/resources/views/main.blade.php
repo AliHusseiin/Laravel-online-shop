@@ -152,9 +152,10 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="{{ url('') }}" class="nav-item nav-link active">Home</a>
                             <a href="{{ url('shop') }}" class="nav-item nav-link">Shop</a>
+                            <a href="{{ url('details') }}" class="nav-item nav-link">Shop Detail</a>
                             <a href="{{ url('cart') }}" class="nav-item nav-link">Cart</a>
                             <a href="{{ url('checkout') }}" class="nav-item nav-link"">Checkout</a>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <a href="{{ url('contact') }}" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">
@@ -238,14 +239,40 @@
                     <div class="col-md-4 mb-5">
                         <h5 class="text-secondary text-uppercase mb-4">Newsletter</h5>
                         <p>Duo stet tempor ipsum sit amet magna ipsum tempor est</p>
-                        <form action="">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Your Email Address" />
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary">Sign Up</button>
-                                </div>
+                        @php
+                            if (Auth::user()) {
+                                $id = Auth::user()->id;
+                                $newsletter = Auth::user()->newsletter;
+                            } else {
+                                $id = null;
+                                $newsletter = 0;
+                            }
+                            
+                        @endphp
+                        @if ($message = Session::get('success'))
+                            <div class="alert alert-success alert-block">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>{{ $message }}</strong>
                             </div>
-                        </form>
+                        @endif
+
+
+                        @if (!$newsletter)
+                            <form method="POST" action="{{ url('/' . $id) }}"enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Your Email Address"
+                                        name="newsletter" />
+                                    <div class="input-group-append">
+
+
+                                        <button class="btn btn-primary">Sign Up</button>
+                                    </div>
+                                </div>
+                            </form>
+                        @endif
+
                         <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
                         <div class="d-flex">
                             <a class="btn btn-primary btn-square mr-2" href="#"><i

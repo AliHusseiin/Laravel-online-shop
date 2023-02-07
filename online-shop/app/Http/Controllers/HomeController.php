@@ -6,18 +6,21 @@ use App\Models\Category;
 use App\Models\Color;
 use App\Models\product;
 use App\Models\Size;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
     function index()
     {
+        $user = User::all();
         
         $categories = Category::all();
         $products = Product::all();
         
-        return view('welcome')->with(['categories'=>$categories,'products'=>$products]);
+        return view('welcome')->with(['categories'=>$categories,'products'=>$products,'user'=>$user]);
     }
     function shop(Request $request)
     {
@@ -55,11 +58,6 @@ class HomeController extends Controller
             }
         }
 
-        /*SELECT * FROM Products WHERE con1 and con2 and (
-        price between 0 and 100 or
-        price between 100 and 200
-        )
-        */
 
         $query = $query->orderByDesc('created_at');
         $products = $query->paginate(3);
@@ -91,6 +89,19 @@ class HomeController extends Controller
         }
         return abort(404);
     }
+
+    function newsLetter($id,Request $request)
+    {
+        $user = User::findOrFail($id);
+        
+       
+        $user['newsletter'] = isset($request['newsletter']) ? 1 : 0;
+        $user->save();
+        return Redirect::back()->with('success','You have been subscribed to NewsLetter Successfuly');
+
+
+    }
+  
     
 }
 

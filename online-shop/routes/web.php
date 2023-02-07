@@ -3,6 +3,9 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DetailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -24,11 +27,16 @@ Route::get('/', [HomeController::class,'index']
 );
 Route::get('/shop', [HomeController::class, 'shop']);
 Route::get('/cart',[CartController::class,'index'] );
+Route::get('/checkout',[CheckoutController::class,'index'] );
+Route::get('/contact',[ContactController::class,'index'] );
+Route::get('/details',[DetailController::class,'index'] );
+Route::get('/details/{id}',[DetailController::class,'index'] );
 Route::get('/add-product',[HomeController::class,'add_product'] );
 Route::get('/addtowishlist',[HomeController::class,'addToWishList'] );
 Route::get('/inc-product',[CartController::class,'incProduct'] );
 Route::get('/dec-product',[CartController::class,'decProduct'] );
 Route::get('/rem-product',[CartController::class,'removeProduct'] );
+Route::put('/{id}', [HomeController::class, 'newsLetter']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -48,4 +56,8 @@ Route::middleware(['auth', 'can:is_admin'])->prefix('admin')->group(function () 
   Route::get('', [AdminController::class, 'index']);
   Route::resource('categories', CategoryController::class);
   Route::resource('products', ProductController::class);
+});
+Route::middleware(['auth'])->group(function () {
+  Route::get('/checkout',[CheckoutController::class,'index'] );
+ 
 });
