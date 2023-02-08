@@ -199,7 +199,8 @@
                                             <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1"
                                                 style="width: 45px;">
                                             <div class="media-body">
-                                                <h6>{{ Auth::user()->name }}<small> - <i>01 Jan 2045</i></small></h6>
+                                                <h6>{{ Auth::user() ? Auth::user()->name : '' }}<small> - <i>01 Jan
+                                                            2045</i></small></h6>
                                                 <div class="text-primary mb-2">
                                                     <i class="fas fa-star"></i>
                                                     <i class="fas fa-star"></i>
