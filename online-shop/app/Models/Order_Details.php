@@ -13,18 +13,6 @@ class Order_Details extends Model
     {
           $cartIds = Session::get('ids', []);
       $products = Product::findOrFail($cartIds);
-      $quantity = array_count_values($cartIds);
-        $subTotal = 0;
-        $shipping = 0;
-        $total = 0;
-       
-        foreach ($products as $product) 
-        {
-            $shipping += $quantity[$product['id']] * 5;
-            $subTotal += $product->getPriceWithDiscount() * $quantity[$product['id']];
-        }
-        $total = $subTotal + $shipping;
-       
       
     return $products; 
       
