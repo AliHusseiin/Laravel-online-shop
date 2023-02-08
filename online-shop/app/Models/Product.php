@@ -18,10 +18,5 @@ class product extends Model
     public function getPriceWithDiscount(){
         return $this->price - $this->price * $this->discount;
     }
-    // public function getShipping(){
-    //     return $this->quantity * 5;
-    // }
-    //  public function getTotal(){
-    //     return $this->subTotal + $this->getShipping();
-    // }
+ 
 }
