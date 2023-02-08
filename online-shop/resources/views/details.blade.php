@@ -40,13 +40,9 @@
                         <h3>{{ $product['name'] }}</h3>
                         <div class="d-flex mb-3">
                             <div class="text-primary mr-2">
-                                <small class="fas fa-star"></small>
-                                <small class="fas fa-star"></small>
-                                <small class="fas fa-star"></small>
-                                <small class="fas fa-star-half-alt"></small>
-                                <small class="far fa-star"></small>
+                                @include('stars')
                             </div>
-                            <small class="pt-1">(99 Reviews)</small>
+                            <small class="pt-1">({{ $product['rating_count'] }} Reviews)</small>
                         </div>
                         <h3 class="font-weight-semi-bold mb-4">${{ $product['price'] }}</h3>
                         <p class="mb-4">{{ $product['description'] }}</p>
@@ -198,12 +194,12 @@
                             <div class="tab-pane fade" id="tab-pane-3">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h4 class="mb-4">1 review for "Product Name"</h4>
+                                        <h4 class="mb-4">1 review for "{{ $product['name'] }}"</h4>
                                         <div class="media mb-4">
                                             <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1"
                                                 style="width: 45px;">
                                             <div class="media-body">
-                                                <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
+                                                <h6>{{ Auth::user()->name }}<small> - <i>01 Jan 2045</i></small></h6>
                                                 <div class="text-primary mb-2">
                                                     <i class="fas fa-star"></i>
                                                     <i class="fas fa-star"></i>

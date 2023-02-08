@@ -41,12 +41,25 @@
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
-                            {{ Auth::user() ? Auth::user()->name : 'Log In' }}
-
-                            <button class="dropdown-item"
-                                type="button">{{ Auth::user() ? 'Log Out' : 'Sign Up' }}</button>
-                        </button>
+                        @if (Auth::user())
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle"
+                                data-toggle="dropdown">{{ Auth::user()->name }}</button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <form action="{{ url('logout') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <button class="dropdown-item" type="submit">Logout</button>
+                                </form>
+                            </div>
+                        @else
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+                                My Account
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="{{ url('login') }}"class="dropdown-item" type="button">Sign In</a>
+                                <a href="{{ url('register') }}" class="dropdown-item" type="button" type="button">Sign
+                                    Up</a>
+                            </div>
+                        @endif
 
 
 
@@ -94,7 +107,7 @@
             </a>
         </div>
         <div class="col-lg-4 col-6 text-left">
-            <form action="">
+            <form action="{{ url('/shop') }}">
                 <div class="input-group">
                     <input type="text" class="form-control" name="keyword" placeholder="Search for products"
                         value="{{ request()->get('keyword') }}" />
@@ -118,8 +131,8 @@
     <div class="container-fluid bg-dark mb-30">
         <div class="row px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
-                <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse"
-                    href="#navbar-vertical" style="height: 65px; padding: 0 30px">
+                <a class="btn d-flex align-items-center justify-content-between bg-primary w-100"
+                    data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px">
                     <h6 class="text-dark m-0">
                         <i class="fa fa-bars mr-2"></i>Categories
                     </h6>
