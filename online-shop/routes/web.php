@@ -37,6 +37,7 @@ Route::get('/inc-product',[CartController::class,'incProduct'] );
 Route::get('/dec-product',[CartController::class,'decProduct'] );
 Route::get('/rem-product',[CartController::class,'removeProduct'] );
 Route::put('/{id}', [HomeController::class, 'newsLetter']);
+Route::post('/checkout', [CheckoutController::class, 'placeOrder']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

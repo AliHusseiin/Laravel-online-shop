@@ -6,9 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Session;
 
-class Order_Details extends Model
+class OrderDetail extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+       public function order(){
+        return $this->belongsTo(Order::class);
+    }
     public static function orderDetailsProducts()
     {
           $cartIds = Session::get('ids', []);

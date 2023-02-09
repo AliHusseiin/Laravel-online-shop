@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderDetail;
 use App\Models\Order_Details;
 use App\Models\product;
 use Illuminate\Http\Request;
@@ -12,11 +13,11 @@ class CartController extends Controller
     //
     function index()
   {
-        $products = Order_Details::orderDetailsProducts();
-        $quantity= Order_Details::orderDetailsQuantity();
-        $subTotal= Order_Details::orderDetailsSubTotal();
-        $shipping= Order_Details::orderDetailsShipping();
-        $total= Order_Details::orderDetailsTotal();
+        $products = OrderDetail::orderDetailsProducts();
+        $quantity= OrderDetail::orderDetailsQuantity();
+        $subTotal= OrderDetail::orderDetailsSubTotal();
+        $shipping= OrderDetail::orderDetailsShipping();
+        $total= OrderDetail::orderDetailsTotal();
         
     return view('cart', compact('products', 'quantity', 'shipping','subTotal','total'));
     }
